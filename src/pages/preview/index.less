@@ -1,0 +1,167 @@
+.preview_box{
+    display: flex;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    .preview{
+        width: 100%;
+        height: 100%;
+        padding: 70px 20px 20px;
+        box-sizing: border-box;
+        background-color: #fff;
+        &.show{
+            opacity: 1;
+            visibility:  visible;
+        }
+        :global{
+            .ant-tabs-top > .ant-tabs-nav{
+                margin: 0;
+                &:before{display: none;}
+            }
+            .ant-tabs-nav-wrap{
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                width: 100%;
+                height: 60px;
+                padding: 0 20px;
+                border-bottom: 1px solid #eee;
+                box-sizing: border-box;
+                background-color: #fff;
+                justify-content: flex-end;
+            }
+        }
+        .preview_pc{
+            width: 805px;
+            margin: 0 auto;
+            padding: 10px 0 50px;
+        }
+        .preview_mobile{
+            display: flex;
+            position: relative;
+            margin: 0 auto;
+            padding-top: 10px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            .content_bg{
+                position: relative;
+                width: 395px;
+                height: calc(100vh - 100px);
+                margin-left: 3px;
+                padding: 15px 10px;
+                background: url('/phone_middle_model.png') repeat-y;
+                box-sizing: border-box;
+                &::before{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 50px;
+                    background: url('/phone_top_model.png') no-repeat;
+                    content: '';
+                }
+                &::after{
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 60px;
+                    background: url('/phone_bottom_model.png') no-repeat;
+                    content: '';
+                }
+            }
+            .content{
+                position: relative;
+                top: 40px;
+                z-index: 2;
+                overflow-y: auto;
+                height: calc(100% - 60px);
+                padding: 0 15px;
+                box-sizing: border-box;
+            }
+            :global{
+                
+                h1{
+                    font-size: 22px;
+                }
+                h2{
+                    font-size: 18px;
+                }
+                h3{
+                    font-size: 16px;
+                }
+                p,ul,ol,dl{
+                    font-size: 14px;
+                }
+            }
+        }
+        img{
+            max-width: 100%;
+        }
+        .topic_header{
+            .title{
+                margin: 0;
+                padding-top: 15px;
+                color: #171717;
+                font-weight: 600;
+                font-size: 22px;
+                line-height: 30px;
+                letter-spacing: -.6px;
+            }
+            .sub_title{
+                display: flex;
+                margin-top: 8px;
+                color: #a8a8a8;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20px;
+            }
+            img{
+                width: 100%;
+                margin: 40px 0 10px;
+            }
+            .visit_count {
+                display: flex;
+                align-items: center;
+                margin-left: 8px;
+            }
+            .visit_count_num {
+                align-items: center;
+                margin-left: 4px;
+                color: #a8a8a8;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20px;
+            }
+            &.mobile{
+                .title{
+                    letter-spacing: normal;
+                }
+                .sub_title{
+                    margin-bottom: 20px;
+                    padding-bottom: 20px;
+                    border-bottom: 1px solid rgba(0,0,0,.06);
+                }
+                img{
+                    margin-top: 0px;
+                }
+            }
+        }
+    }
+    
+    ol{
+        list-style: auto;
+        padding-left: 1em;
+    }
+    ul{
+        list-style: initial;
+        padding-left: 1.5em;
+    }
+}
