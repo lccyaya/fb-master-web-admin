@@ -17,7 +17,7 @@ export const initialStateConfig = {
 
 export async function getInitialState() {
   return {
-    selectProjects: [{ id: 1, name: '007' }],
+    selectProjects: [{ id: 1, name: '34体育' }],
     authList: [],
     currentProject: 1,
     platforms: [

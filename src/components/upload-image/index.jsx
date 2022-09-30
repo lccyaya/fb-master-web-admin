@@ -50,13 +50,13 @@ const UploadImage = ({ fileList, onChange, btnText = '点击上传' }) => {
     const fmData = new FormData();
     fmData.append('file', file);
     message.loading({ content: '上传中...', key: 'image' });
-    API_SPORT.post('upload', '', fmData)
+    API_SPORT.post('ossUpload', '', fmData)
       .then(APIFilter)
       .then((data) => {
         message.success({ content: '上传成功', key: 'image', duration: 2 });
-        onChange(data.url);
+        onChange(data.presign_url);
         onSuccess({
-          url: data.url,
+          url: data.presign_url,
           status: 'done',
           filename,
           uid: new Date().getTime(),

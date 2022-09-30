@@ -1,47 +1,47 @@
 import { Form, Input, Button, Message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { history, useModel } from 'umi';
-import { APIFilter, API_ADMIN, API_LANGUAGE } from '@/api';
+import { APIFilter, API_SPORT, API_LANGUAGE } from '@/api';
 
 const LoginPage = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
   const onFinish = ({ account, password }) => {
-    API_ADMIN.post('user.login', '1', {
-      account,
+    API_SPORT.post('user.login', '', {
+      username: account,
       password,
     })
       .then(APIFilter)
       .then(async ({ token, info }) => {
-        const { project_list, role_list, select_project_list } = info;
-        if (project_list.length === 0) {
-          Message.error('登录失败，请联系管理员为该账号添加项目！');
-          return;
-        }
-        Message.success('登录成功');
+        // const { project_list, role_list, select_project_list } = info;
+        // if (project_list.length === 0) {
+        //   Message.error('登录失败，请联系管理员为该账号添加项目！');
+        //   return;
+        // }
+        // Message.success('登录成功');
         localStorage.account = account;
         localStorage.token = token;
-        const authList = await API_ADMIN.get('user.module', '1', {}).then(APIFilter);
-        const projects = project_list.sort((a, b) => a.id - b.id);
-        const selectProjects = select_project_list.sort((a, b) => a.id - b.id);
-        const platforms = await API_LANGUAGE.get('platform', '', {}).then(APIFilter);
-        for (let i = 0; i < projects.length; i++) {
-          projects[i].languages = await API_LANGUAGE.get('language.support', '', {
-            project_id: projects[i].id,
-          }).then(APIFilter);
-        }
-        localStorage.setItem('selectProjects', JSON.stringify(selectProjects));
-        localStorage.setItem('authList', JSON.stringify(authList));
-        localStorage.setItem('projects', JSON.stringify(projects));
-        localStorage.setItem('platforms', JSON.stringify(platforms));
-        localStorage.setItem('currentProject', projects[0]?.id);
-        setInitialState({
-          ...initialState,
-          selectProjects,
-          currentProject: localStorage.getItem('currentProject') * 1,
-          projects,
-          platforms,
-          authList,
-        });
+        // const authList = await API_SPORT.get('user.module', '1', {}).then(APIFilter);
+        // const projects = project_list.sort((a, b) => a.id - b.id);
+        // const selectProjects = select_project_list.sort((a, b) => a.id - b.id);
+        // const platforms = await API_LANGUAGE.get('platform', '', {}).then(APIFilter);
+        // for (let i = 0; i < projects.length; i++) {
+        //   projects[i].languages = await API_LANGUAGE.get('language.support', '', {
+        //     project_id: projects[i].id,
+        //   }).then(APIFilter);
+        // }
+        // localStorage.setItem('selectProjects', JSON.stringify(selectProjects));
+        // localStorage.setItem('authList', JSON.stringify(authList));
+        // localStorage.setItem('projects', JSON.stringify(projects));
+        // localStorage.setItem('platforms', JSON.stringify(platforms));
+        // localStorage.setItem('currentProject', projects[0]?.id);
+        // setInitialState({
+        //   ...initialState,
+        //   selectProjects,
+        //   currentProject: localStorage.getItem('currentProject') * 1,
+        //   projects,
+        //   platforms,
+        //   authList,
+        // });
 
         history.push('/');
       });

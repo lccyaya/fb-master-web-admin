@@ -35,7 +35,7 @@ const UploadFile = ({ onChange, children, params = {}, btnText = '点击上传' 
     onChange('');
     const fmData = new FormData();
     fmData.append('file', file);
-    API_SPORT.post('upload', '', fmData)
+    API_SPORT.post('ossUpload', '', fmData)
       .then(APIFilter)
       .then((data) => {
         onChange(data.url);

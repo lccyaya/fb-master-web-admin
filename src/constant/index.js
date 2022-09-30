@@ -324,3 +324,46 @@ export const MATCH_RESULT = ((ENUM) => {
   ENUM[(ENUM.LOSE = 3)] = 3;
   return ENUM;
 })({});
+
+// 0 全部、1 是、2 否
+export const NEWS_IS_RECOMMEND = ((ENUM) => {
+  ENUM[(ENUM.ALL = 0)] = '全部';
+  ENUM[(ENUM.TRUE = 1)] = '是';
+  ENUM[(ENUM.FALSE = 2)] = '否';
+  return ENUM;
+})({});
+
+// 0 全部、1 是、2 否
+export const NEWS_IS_TOP = ((ENUM) => {
+  ENUM[(ENUM.ALL = 0)] = '全部';
+  ENUM[(ENUM.TRUE = 1)] = '是';
+  ENUM[(ENUM.FALSE = 2)] = '否';
+  return ENUM;
+})({});
+
+// 0 全部、1 新闻、2 分析、3 公告
+export const NEWS_TYPE = ((ENUM) => {
+  ENUM[(ENUM.ALL = 0)] = '全部';
+  ENUM[(ENUM.NEWS = 1)] = '新闻';
+  ENUM[(ENUM.ANALYZE = 2)] = '分析';
+  ENUM[(ENUM.NOTE = 3)] = '公告';
+  return ENUM;
+})({});
+
+// 1 新闻、2 分析、3 公告
+export const NEWS_TYPE_NOALL = ((ENUM) => {
+  ENUM[(ENUM.NEWS = 1)] = '新闻';
+  ENUM[(ENUM.ANALYZE = 2)] = '分析';
+  ENUM[(ENUM.NOTE = 3)] = '公告';
+  return ENUM;
+})({});
+
+// 0 全部、1 web、2 H5、3 iOS、4 Android
+export const NEWS_PLATFORM = ((ENUM) => {
+  ENUM[(ENUM.NOTE = 1)] = '全部';
+  ENUM[(ENUM.NEWS = 2)] = 'web';
+  ENUM[(ENUM.ANALYZE = 3)] = 'H5';
+  ENUM[(ENUM.NOTE = 4)] = 'iOS';
+  ENUM[(ENUM.NOTE = 5)] = 'Android';
+  return ENUM;
+})({});

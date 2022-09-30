@@ -1,24 +1,24 @@
 export default [
-  // {
-  //   path: '/user',
-  //   layout: false,
-  //   routes: [
-  //     {
-  //       path: '/user',
-  //       redirect: '/user/login',
-  //     },
-  //     {
-  //       path: '/user/login',
-  //       layout: false,
-  //       name: 'login',
-  //       component: './user/login',
-  //       locale: false,
-  //     },
-  //     {
-  //       component: '404',
-  //     },
-  //   ],
-  // },
+  {
+    path: '/user',
+    layout: false,
+    routes: [
+      {
+        path: '/user',
+        redirect: '/user/login',
+      },
+      {
+        path: '/user/login',
+        layout: false,
+        name: 'login',
+        component: './user/login',
+        locale: false,
+      },
+      {
+        component: '404',
+      },
+    ],
+  },
 
   {
     path: '/',
@@ -111,6 +111,14 @@ export default [
     name: '反馈后台',
     component: './feedback-manage',
     key: 'feedback',
+    access: 'normalRouteFilter',
+    locale: false,
+  },
+  {
+    path: '/news',
+    name: '咨询管理',
+    component: './News/List',
+    key: 'news',
     access: 'normalRouteFilter',
     locale: false,
   },
