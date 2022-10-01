@@ -48,7 +48,7 @@ const NewsList: React.FC<Props> = (props) => {
       title: '作者',
       width: 120,
       render: (record) => {
-        return record.user_id;
+        return record.nickname;
       },
     },
     {

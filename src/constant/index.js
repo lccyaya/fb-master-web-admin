@@ -14,6 +14,7 @@ export const BANNER_TYPE_007 = ((ENUM) => {
   ENUM[(ENUM.HOME2 = 'home2')] = 'key_web_home_banner';
   ENUM[(ENUM.TIPS2 = 'tips2')] = 'key_web_tips_banner';
   ENUM[(ENUM.MATCH2 = 'match2')] = 'key_web_detail_banner';
+  ENUM[(ENUM.NEWS1 = 'news1')] = '移动端资讯 Banner';
   return ENUM;
 })({});
 

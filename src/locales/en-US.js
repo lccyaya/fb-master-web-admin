@@ -11,6 +11,7 @@ export default {
   key_web_home_banner: 'Web Home Banner',
   key_web_tips_banner: 'Web Tips Banner',
   key_web_detail_banner: 'Web Detail Banner',
+  key_mobile_news_banner: '移动端资讯 Banner',
   key_web_pop: 'Web Pop',
   MajorMatch: 'MajorMatch',
   'MajorMatch List': 'MajorMatch List',
