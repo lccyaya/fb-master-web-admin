@@ -16,7 +16,7 @@ const Banners = () => {
   const [record, setRecord] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [loading, setLoading] = useState(false);
-  const mobileList = ['home1', 'headline', 'flash', 'tips1', 'match1'];
+  const mobileList = ['home1', 'headline', 'flash', 'tips1', 'match1', 'news1'];
   const position = form.getFieldValue('position');
   const columns = [
     {

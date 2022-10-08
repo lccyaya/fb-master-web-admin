@@ -116,7 +116,7 @@ export default [
   },
   {
     path: '/news',
-    name: '咨询管理',
+    name: '资讯管理',
     component: './News/List',
     key: 'news',
     access: 'normalRouteFilter',

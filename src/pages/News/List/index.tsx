@@ -31,6 +31,13 @@ const NewsList: React.FC<Props> = (props) => {
 
   const columns: ColumnsType<{}> = [
     {
+      title: '资讯id',
+      width: 120,
+      render: (record) => {
+        return record.id;
+      },
+    },
+    {
       title: '标题',
       width: 120,
       render: (record) => {

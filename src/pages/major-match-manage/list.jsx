@@ -16,6 +16,13 @@ const MajorMatch = () => {
   const [loading, setLoading] = useState(false);
   const columns = [
     {
+      title: '比赛id',
+      width: 120,
+      render: (record) => {
+        return record.match_id;
+      },
+    },
+    {
       title: intl.formatMessage({ id: 'Match Time' }),
       dataIndex: 'match_time',
       search: false,
