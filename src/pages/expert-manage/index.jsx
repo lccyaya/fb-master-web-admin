@@ -7,10 +7,12 @@ import { useAntdTable } from 'ahooks';
 import Search from '@/components/search';
 import { APIFilter, API_SPORT } from '@/api';
 import CreateExpert from './components/create-expert';
+import EditExpert from './components/Edit';
 
 const Page = ({ projectId }) => {
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
+  const [editVisible, setEditVisible] = useState(false);
   const [detail, setDetail] = useState(null);
   const getExpertList = ({ current, pageSize = 10 }, query) => {
     return API_SPORT.get('expert.list', '', {
@@ -88,6 +90,23 @@ const Page = ({ projectId }) => {
       },
     },
     {
+      title: '审核状态',
+      width: 100,
+      render: (record) => {
+        let color = 'black';
+        let des = '待审核';
+        if (record.status == 1) {
+          color = 'green';
+          des = '审核通过';
+        }
+        if (record.status == 2) {
+          color = 'red';
+          des = '审核失败';
+        }
+        return <div style={{ color }}>{des}</div>;
+      },
+    },
+    {
       title: '操作',
       width: 120,
       render: (record) => {
@@ -103,6 +122,18 @@ const Page = ({ projectId }) => {
             >
               编辑
             </a>
+            {record.status == 3 ? (
+              <a
+                onClick={() => {
+                  ReactDOM.unstable_batchedUpdates(() => {
+                    setEditVisible(true);
+                    setDetail(record);
+                  });
+                }}
+              >
+                审核
+              </a>
+            ) : null}
           </Space>
         );
       },
@@ -142,6 +173,17 @@ const Page = ({ projectId }) => {
           }}
           onOk={() => {
             setVisible(false);
+            search?.reset();
+          }}
+        />
+        <EditExpert
+          visible={editVisible}
+          detail={detail}
+          onCancel={() => {
+            setEditVisible(false);
+          }}
+          onSuccess={() => {
+            setEditVisible(false);
             search?.reset();
           }}
         />

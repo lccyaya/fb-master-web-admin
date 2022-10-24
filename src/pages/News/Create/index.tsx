@@ -119,10 +119,10 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
         is_publish: data.is_publish,
         is_rec: data.is_rec,
         is_top: data.is_top,
-        top_at: moment(data.top_at*1000),
+        top_at: moment(data.top_at * 1000),
         visit: data.visit,
         support: data.support,
-        published_at: moment(data.published_at*1000),
+        published_at: moment(data.published_at * 1000),
         updated_at: moment(data.updated_at),
       });
 
@@ -141,11 +141,39 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
 
     editor.config = {
       ...editor.config,
-      menus: ['head', 'indent', 'emoticon', 'undo', 'redo'],
+      menus: ['head', 'indent', 'emoticon', 'undo', 'redo', 'image'],
       withCredentials: true,
       height: 400,
       zIndex: 100,
       placeholder: '请输入内容',
+      customUploadImg: (resultFiles, insertImgFn) => {
+        // resultFiles 是 input 中选中的文件列表
+        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+        const file = resultFiles[0];
+        const fmData = new FormData();
+        fmData.append('file', file);
+        API_SPORT.post('ossUpload', '', fmData)
+          .then(APIFilter)
+          .then((data) => {
+            message.success({ content: '上传成功', key: 'image', duration: 2 });
+            insertImgFn(data.presign_url);
+          })
+          .catch((e) => {
+            message.error({ content: '上传失败', key: 'image', duration: 2 });
+          });
+      },
+      // uploadImgServer: 'http://47.94.89.58:8081/api/ossUpload',
+      // uploadImgMaxLength: 1,
+      // uploadFileName: 'file',
+      // uploadImgHooks: {
+      //   customInsert: (insertImgFn, result) => {
+      //     // result 即服务端返回的接口
+      //     console.log('customInsert', result);
+
+      //     // insertImgFn 可把图片插入到编辑器，传入图片 src ，执行函数即可
+      //     insertImgFn(result.data.presign_url);
+      //   },
+      // },
       onchange: (newHtml) => form.setFieldsValue({ content: newHtml }),
     };
 

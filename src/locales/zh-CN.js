@@ -11,6 +11,7 @@ export default {
   key_web_home_banner: 'web 端首页 Banner',
   key_web_tips_banner: 'web 端 Tips 页 Banner',
   key_web_detail_banner: 'web 端比赛详情页 Banner',
+  key_mobile_news_banner: '移动端资讯 Banner',
   key_web_pop: 'web 端弹窗',
   MajorMatch: '重点赛事',
   'MajorMatch List': '重点赛事列表',

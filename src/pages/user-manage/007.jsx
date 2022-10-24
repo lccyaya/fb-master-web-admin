@@ -54,7 +54,7 @@ const UserManage = ({}) => {
       search: false,
       title: intl.formatMessage({ id: 'Registration time' }),
       render: (_, record) => {
-        return moment(record.CreatedAt).format('YYYY.MM.DD HH:mm');
+        return moment(record.created_at).format('YYYY.MM.DD HH:mm');
       },
     },
     {
