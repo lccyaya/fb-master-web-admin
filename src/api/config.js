@@ -26,10 +26,10 @@ const API_LANGUAGE_DOMAINS = {
 //   [API_ENVS.local]: 'http://10.149.54.90:8080',
 // };
 const API_SPORTS_DOMAINS = {
-  [API_ENVS.prod]: 'http://47.93.46.29:8081',
-  [API_ENVS.test]: 'http://47.93.46.29:8081',
-  [API_ENVS.dev]: 'http://47.93.46.29:8081',
-  [API_ENVS.local]: 'http://47.93.46.29:8081',
+  [API_ENVS.prod]: 'http://47.94.89.58:8081',
+  [API_ENVS.test]: 'http://47.94.89.58:8081',
+  [API_ENVS.dev]: 'http://47.94.89.58:8081',
+  [API_ENVS.local]: 'http://47.94.89.58:8081',
 };
 
 // const API_SPORTS_DOMAINS = {
