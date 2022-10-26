@@ -93,6 +93,7 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
         source: 99,
         visit,
         support,
+        source_lang: 'zh-CN',
       })
         .then(APIFilter)
         .then(() => {
