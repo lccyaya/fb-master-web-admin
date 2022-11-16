@@ -35,6 +35,13 @@ const Page = ({ projectId }) => {
   });
   const columns = [
     {
+      title: '专家ID',
+      width: 120,
+      render: (record) => {
+        return record.id;
+      },
+    },
+    {
       title: '专家昵称',
       width: 120,
       render: (record) => {
