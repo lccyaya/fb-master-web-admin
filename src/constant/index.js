@@ -253,6 +253,13 @@ export const REGISTER_PLATFORM = ((ENUM) => {
   ENUM[(ENUM.ANDROID = 'Android')] = 'Android';
   return ENUM;
 })({});
+// export const CHANNELS = ((ENUM) => {
+//   ENUM[(ENUM.H5 = 'H5')] = 'H5';
+//   ENUM[(ENUM.PC = 'PC')] = 'PC';
+//   ENUM[(ENUM.IOS = 'iOS')] = 'iOS';
+//   ENUM[(ENUM.ANDROID = 'Android')] = 'Android';
+//   return ENUM;
+// })({});
 
 // 平台
 export const DATA_PLATFORM = ((ENUM) => {

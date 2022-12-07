@@ -1,235 +1,98 @@
-import React from 'react'
+
+
+
+
+import React, { useRef, useState } from 'react'
 import ProTable from '@ant-design/pro-table'
 import { Select, message } from 'antd'
 import { useIntl } from 'umi';
+import { columns } from "./tabsconfig"
+import { APIFilter, API_SPORT } from '@/api';
+import { Button } from 'antd';
+
+
 const Table = () => {
     const { Option } = Select
     const intl = useIntl();
-    const columns = [
-        {
-            title: intl.formatMessage({ id: 'Order ID' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: true,
-            // fixed: 'left',
+    const actionRef = useRef()
+    const findData = (params) => {
+        console.log(params)
+    }
+    const [formValue, setFormValue] = useState()
 
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Order Money' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: true,
-            // fixed: 'left',
 
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-
-        {
-            title: intl.formatMessage({ id: 'Actual payment time' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-
-        {
-            title: intl.formatMessage({ id: 'Username' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-
-        {
-            title: intl.formatMessage({ id: 'Create Time' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: true,
-            valueType: 'dateRange',
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Pay Time' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: true,
-            valueType: 'dateRange',
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Order placing platform' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Registration channels' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Scheme title' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Expert name' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Expert ID' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Scheme play' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Order State' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: true,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Affiliated person' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: intl.formatMessage({ id: 'Recharge time' }),
-            dataIndex: 'id',
-            key: 'id',
-            search: false,
-
-            render: (value) => {
-                return 'NO.' + value.toString().padStart(8, '0')
-            },
-        },
-        {
-            title: '玩法类型',
-            dataIndex: 'orgId',
-            renderFormItem: () => (
-                <Select style={{ width: '100%' }} allowClear={true}>
-
-                </Select>
-            ),
-            hideInTable: true,
-        },
-        {
-            title: '攻略状态',
-            dataIndex: 'orgId',
-            renderFormItem: () => (
-                <Select style={{ width: '100%' }} allowClear={true}>
-
-                </Select>
-            ),
-            hideInTable: true,
-        },
-
-    ]
     return (
         <div style={{ background: "#fff" }}> <ProTable
-            columns={columns}
-            rowKey={(reward) => reward.id}
-            // actionRef={actionRef}
-            // pagination={{
-            //     showSizeChanger: true,
-            // }}
+            bordered
+            columns={columns(intl)}
+            rowKey="id"
+            actionRef={actionRef}
+            scroll={{ x: 'max-content' }}
+            dateFormatter="number"
+            pagination={{
+                showSizeChanger: true,
+                defaultPageSize: 10,
+                size: "default",
+                showTotal: false,
+
+            }}
             search={{
+                collapsed: false,
+                collapseRender: () => null,
                 labelWidth: 'auto',
-                span: 8,
+                span: 7,
                 searchText: "刷新",
+                optionRender: (searchConfig, formProps, dom) => [
+
+                    <Button type="primary" key="primary" onClick={() => {
+                        actionRef.current.reload();
+                    }}>
+                        刷新
+                    </Button>,
+                    <Button key="out" onClick={() => {
+                        setFormValue(null)
+                        actionRef.current.reset();
+                    }}>
+                        重置
+                    </Button>,
+
+                ],
+            }}
+            form={{
+                onValuesChange: (_, value) => {
+                    setFormValue(value)
+
+                }
+            }}
+            params={formValue}
+            request={(params, sorter, filter) => {
+                console.log(params, "ppppppp");
+                params.create_order_begin = params.created_at && Math.round(params.created_at[0] / 1000)
+                params.create_order_end = params.created_at && Math.round(params.created_at[1] / 1000)
+                params.page = params.current
+                params.size = params.pageSize
+                delete params.current
+                delete params.pageSize
+                delete params.created_at
+                return API_SPORT.get('scheme/order', '', params)
+                    .then(APIFilter)
+                    .then((e) => {
+                        console.log(e);
+                        return {
+                            // data: e?.users,
+                            data: e?.schemeList,
+                            total: e?.total,
+                            success: true,
+                        };
+                    });
+
 
 
             }}
-            scroll={{ x: 1600 }}
-            // onReset={() => {
-            //     setSearchSelect('1')
-            // }}
-            // request={(params, sorter, filter) => {
-
-            //     params.startTime = params.searchtime && params.searchtime[0]
-            //     params.endTime = params.searchtime && params.searchtime[1]
-            //     delete params.searchname
-            //     delete params.searchtime
-
-            //     const data = getPurchasePage({ ...params })
-            //     const result = data.then((b) => {
-            //         setTotal(b.data.pagination.total)
-            //         setTourist(b.data.pagination.totalTouristDevNum)
-            //         setPrice(b.data.pagination.totalCosts)
-            //         const lists = {
-            //             data: b.data.list,
-            //             total: b.data.pagination.total,
-            //             success: true,
-            //             pageSize: b.data.pagination.size,
-            //             current: b.data.pagination.page,
-            //         }
-            //         return lists
-            //     })
-            //     return result
-            // }}
-            dateFormatter="string"
-
             options={false}
-        /></div>
+        />
+
+        </div>
     )
 }
 
