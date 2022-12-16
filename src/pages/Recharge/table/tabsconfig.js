@@ -89,7 +89,7 @@ const columns = (intl) => {
              align: "center",
           
             render: (value) => {
-                return value==0?"-":moment(value).format('YYYY.MM.DD HH:mm')
+                return value==0?"-":moment(value*1000).format('YYYY.MM.DD HH:mm')
             }
         },
          // 创建时间搜索
@@ -114,7 +114,7 @@ const columns = (intl) => {
             title: intl.formatMessage({ id: 'Recharge placing platform' }),
             dataIndex: 'charge_platform',
             key: 'charge_platform',
-            valueType: 'dateRange',
+            // valueType: 'dateRange',
             search: false,
             align: "center",
          
@@ -179,7 +179,7 @@ const columns = (intl) => {
             search: false,
            align: "center",
             render: (value) => {
-                return value==0?"-":moment(value).format('YYYY.MM.DD HH:mm')
+                return value==0?"-":moment(value*1000).format('YYYY.MM.DD HH:mm')
             },
         },
 
