@@ -94,7 +94,10 @@ const CreateScheme = ({ visible, onCancel, onSuccess, detail }) => {
 
     editor.config = {
       ...editor.config,
-      menus: ['head', 'indent', 'emoticon', 'undo', 'redo'],
+      menus: ['head', 'head',
+        'bold',
+        'foreColor',
+        'fontSize', 'indent', 'emoticon', 'undo', 'redo'],
       withCredentials: true,
       height: 400,
       zIndex: 100,
@@ -160,7 +163,7 @@ const CreateScheme = ({ visible, onCancel, onSuccess, detail }) => {
       footer={
         <div style={{ textAlign: 'right' }}>
           {isEdit &&
-          (detail?.state === SCHEME_STATE.HIT || detail?.state === SCHEME_STATE.NOT_HIT) ? null : (
+            (detail?.state === SCHEME_STATE.HIT || detail?.state === SCHEME_STATE.NOT_HIT) ? null : (
             <Button
               type="primary"
               style={{ marginRight: 16 }}
@@ -273,7 +276,7 @@ const CreateScheme = ({ visible, onCancel, onSuccess, detail }) => {
             id="J_Editor_FENXI"
             className={
               isEdit &&
-              (detail?.state === SCHEME_STATE.HIT || detail?.state === SCHEME_STATE.NOT_HIT)
+                (detail?.state === SCHEME_STATE.HIT || detail?.state === SCHEME_STATE.NOT_HIT)
                 ? styles.disbaled_box
                 : null
             }

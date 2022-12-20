@@ -139,21 +139,10 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
     }
 
     editor = new E('#J_Editor_FENXI');
-    console.log(editor, 'ppppppppp');
 
     editor.config = {
       ...editor.config,
-      menus: [
-        'head',
-        'bold',
-        'foreColor',
-        'fontSize',
-        'indent',
-        'emoticon',
-        'undo',
-        'redo',
-        'image',
-      ],
+      menus: ['head', 'indent', 'emoticon', 'undo', 'redo', 'image'],
       withCredentials: true,
       height: 400,
       zIndex: 100,
@@ -242,33 +231,12 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
         <Form.Item label="作者" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
           <AuthorSelect width={'100%'} />
         </Form.Item>
-        <Form.Item label="头像" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
-          <AuthorSelect width={'100%'} />
-        </Form.Item>
         <Form.Item
           label="摘要"
           name="description"
           rules={[{ required: true, message: '不能为空' }]}
         >
           <Input.TextArea placeholder="请输入" />
-        </Form.Item>
-        <Form.Item label="标签" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
-          <AuthorSelect width={'100%'} />
-        </Form.Item>
-        <Form.Item label="缩略图" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
-          <AuthorSelect width={'100%'} />
-        </Form.Item>
-        <Form.Item label="作者ID" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
-          <AuthorSelect width={'100%'} />
-        </Form.Item>
-        <Form.Item label="资讯ID" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
-          <AuthorSelect width={'100%'} />
-        </Form.Item>
-        <Form.Item label="比赛ID" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
-          <AuthorSelect width={'100%'} />
-        </Form.Item>
-        <Form.Item label="球队ID" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
-          <AuthorSelect width={'100%'} />
         </Form.Item>
         <Form.Item label="图片1录入方式" name="radio" initialValue="link">
           <Radio.Group
@@ -357,9 +325,6 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
           <Input type="number" maxLength={20} />
         </Form.Item>
         <Form.Item label="点赞" name="support">
-          <Input type="number" maxLength={20} />
-        </Form.Item>
-        <Form.Item label="热度" name="hot">
           <Input type="number" maxLength={20} />
         </Form.Item>
         <Form.Item
