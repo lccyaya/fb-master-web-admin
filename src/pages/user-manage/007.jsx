@@ -155,8 +155,6 @@ const UserManage = ({ }) => {
     const datarender = (date) => {
       return date && moment(moment(date).format('YYYY-MM-DD')).valueOf() / 1000;
     };
-
-    console.log(last_login_source_time, "ppppppp");
     return API_SPORT.get('usersInfo', '', {
 
       page: current,
