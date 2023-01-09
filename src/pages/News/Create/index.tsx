@@ -239,12 +239,12 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
           </Form.Item>
           <div id="J_Editor_FENXI" />
         </Form.Item>
-        <Form.Item label="作者" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
+        {/* <Form.Item label="作者" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
           <AuthorSelect width={'100%'} />
         </Form.Item>
         <Form.Item label="头像" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
           <AuthorSelect width={'100%'} />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
           label="摘要"
           name="description"
@@ -252,7 +252,7 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
         >
           <Input.TextArea placeholder="请输入" />
         </Form.Item>
-        <Form.Item label="标签" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
+        {/* <Form.Item label="标签" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
           <AuthorSelect width={'100%'} />
         </Form.Item>
         <Form.Item label="缩略图" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
@@ -269,7 +269,7 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
         </Form.Item>
         <Form.Item label="球队ID" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
           <AuthorSelect width={'100%'} />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="图片1录入方式" name="radio" initialValue="link">
           <Radio.Group
             onChange={(e) => {
@@ -353,12 +353,12 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
             style={{ width: '100%' }}
           />
         </Form.Item>
-        <Form.Item label="浏览" name="visit">
+        {/* <Form.Item label="浏览" name="visit">
           <Input type="number" maxLength={20} />
         </Form.Item>
         <Form.Item label="点赞" name="support">
           <Input type="number" maxLength={20} />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="热度" name="hot">
           <Input type="number" maxLength={20} />
         </Form.Item>
