@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Table, Form, Input, Image, Space } from 'antd';
+import { Card, Table, Form, Input, Image, Space, Select } from 'antd';
 import { connect } from 'umi';
 import { useAntdTable } from 'ahooks';
 import Search from '@/components/search';
 import { APIFilter, API_SPORT } from '@/api';
 import CreateExpert from './components/create-expert';
 import EditExpert from './components/Edit';
+import IsDisable from "./components/IsDisable"
 
 const Page = ({ projectId }) => {
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(0);
   const [detail, setDetail] = useState(null);
   const getExpertList = ({ current, pageSize = 10 }, query) => {
-    return API_SPORT.get('expert.list', '', {
+    return API_SPORT.get('expert/manage', '', {
       page: current,
       size: pageSize,
       ...query,
@@ -28,6 +30,24 @@ const Page = ({ projectId }) => {
         };
       });
   };
+  const categorys = [
+    {
+      value: "1",
+      label: "审核通过"
+    },
+    {
+      value: "2",
+      label: "审核失败"
+    },
+    {
+      value: "3",
+      label: "待审核"
+    },
+    {
+      value: "4",
+      label: "禁用"
+    },
+  ]
   const { tableProps, search, refresh } = useAntdTable(getExpertList, {
     defaultPageSize: 10,
     form,
@@ -63,20 +83,6 @@ const Page = ({ projectId }) => {
       },
     },
     {
-      title: '总方案数',
-      width: 120,
-      render: (record) => {
-        return <div>{record.scheme_num}</div>;
-      },
-    },
-    {
-      title: '总收益',
-      width: 120,
-      render: (record) => {
-        return <div>{record.profit}</div>;
-      },
-    },
-    {
       title: '粉丝数',
       width: 120,
       render: (record) => {
@@ -84,18 +90,60 @@ const Page = ({ projectId }) => {
       },
     },
     {
-      title: '统计',
+      title: '总发布',
       width: 120,
       render: (record) => {
-        return (
-          <div>
-            <div>命中率：{record.hit_rate}%</div>
-            <div>最近连中：{record.recent_loop_hit_num}</div>
-            <div>最长连中：{record.max_hit}</div>
-          </div>
-        );
+        return <div>{record.scheme_num}</div>;
       },
     },
+    {
+      title: '总命中率',
+      width: 120,
+      render: (record) => {
+        return <div>{record.hit_rate}%</div>;
+      },
+    },
+    {
+      title: '总收益',
+      width: 120,
+      render: (record) => {
+        return <div>{record.amount}</div>;
+      },
+    },
+    {
+      title: '累计售出',
+      width: 120,
+      render: (record) => {
+        return <div>{record.sale_num}</div>;
+      },
+    },
+    {
+      title: '可结算',
+      width: 120,
+      render: (record) => {
+        return <div>{record.settlement_amount}</div>;
+      },
+    },
+    {
+      title: '分成比例',
+      width: 120,
+      render: (record) => {
+        return <div>{record.commission_rate}</div>;
+      },
+    },
+    // {
+    //   title: '统计',
+    //   width: 120,
+    //   render: (record) => {
+    //     return (
+    //       <div>
+    //         <div>命中率：{record.hit_rate}%</div>
+    //         <div>最近连中：{record.recent_loop_hit_num}</div>
+    //         <div>最长连中：{record.max_hit}</div>
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       title: '审核状态',
       width: 100,
@@ -109,6 +157,10 @@ const Page = ({ projectId }) => {
         if (record.status == 2) {
           color = 'red';
           des = '审核失败';
+        }
+        if (record.status == 4) {
+          color = '#999999';
+          des = '禁用';
         }
         return <div style={{ color }}>{des}</div>;
       },
@@ -141,6 +193,26 @@ const Page = ({ projectId }) => {
                 审核
               </a>
             ) : null}
+            {record.status == 1 ? (
+              <a
+                onClick={() => {
+                  setIsModalOpen(4)
+                  setDetail(record);
+                }}
+              >
+                禁用
+              </a>
+            ) : null}
+            {record.status == 4 ? (
+              <a
+                onClick={() => {
+                  setIsModalOpen(1)
+                  setDetail(record);
+                }}
+              >
+                启用
+              </a>
+            ) : null}
           </Space>
         );
       },
@@ -149,6 +221,7 @@ const Page = ({ projectId }) => {
   useEffect(() => {
     search.reset();
   }, [projectId]);
+
   return (
     <PageContainer>
       <Card>
@@ -168,6 +241,16 @@ const Page = ({ projectId }) => {
               label: '专家昵称',
               name: 'nickname',
               node: <Input placeholder="请输入" allowClear />,
+            },
+            {
+              label: '专家状态',
+              name: 'status',
+              node: <Select
+                style={{ width: 160 }}
+                placeholder="请选择"
+                allowClear
+                options={categorys}
+              />
             },
           ]}
         />
@@ -194,6 +277,15 @@ const Page = ({ projectId }) => {
             search?.reset();
           }}
         />
+        <IsDisable onOk={() => {
+          setIsModalOpen(0)
+          search?.reset();
+        }}
+          handleCancel={() => {
+            setIsModalOpen(0)
+          }}
+          isModalOpen={isModalOpen} detail={detail} />
+
       </Card>
     </PageContainer>
   );
@@ -204,3 +296,4 @@ export default connect(({ global }) => ({
   projectId: global.projectId,
   projectName: global.projectName,
 }))(Page);
+

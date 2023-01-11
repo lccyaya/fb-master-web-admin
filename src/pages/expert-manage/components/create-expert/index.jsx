@@ -23,6 +23,10 @@ const CreateExpert = ({ visible, onCancel, onOk, detail }) => {
         nickname: '',
         avatar: '',
         introduce: '',
+        user_name: "",
+        user_avatar: "",
+        connect: "",
+        name: ""
       });
     }
   }, [visible]);
@@ -50,13 +54,17 @@ const CreateExpert = ({ visible, onCancel, onOk, detail }) => {
             type="primary"
             onClick={() => {
               form.validateFields().then((value) => {
-                const { nickname, avatar, introduce } = value;
+                const { nickname, avatar, introduce, user_name, user_avatar, connect, name } = value;
                 setConfirmLoading(true);
                 API_SPORT.post('expert', '', {
                   id: detail?.id || detail?.ID,
                   nickname,
                   avatar,
                   introduce,
+                  user_name,
+                  user_avatar,
+                  connect,
+                  name
                 })
                   .then(APIFilter)
                   .then((e) => {
@@ -98,6 +106,35 @@ const CreateExpert = ({ visible, onCancel, onOk, detail }) => {
             rules={[{ required: true, message: '不能为空' }]}
           >
             <Input.TextArea placeholder="请输入" />
+          </Form.Item>
+          <Form.Item
+            label="用户名"
+            name="user_name"
+            rules={[{ required: true, message: '不能为空' }]}
+          >
+            <Input placeholder="请输入" />
+          </Form.Item>
+          <Form.Item
+            label="用户头像"
+            name="user_avatar"
+            rules={[{ required: true, message: '不能为空' }]}
+            valuePropName={'fileList'}
+          >
+            <UploadImage />
+          </Form.Item>
+          <Form.Item
+            label="手机号"
+            name="connect"
+            rules={[{ required: true, message: '不能为空' }]}
+          >
+            <Input placeholder="请输入" />
+          </Form.Item>
+          <Form.Item
+            label="真实姓名"
+            name="name"
+            rules={[{ required: true, message: '不能为空' }]}
+          >
+            <Input placeholder="请输入" />
           </Form.Item>
         </Form>
       </div>
