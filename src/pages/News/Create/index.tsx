@@ -54,6 +54,10 @@ type Props = {
 const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) => {
   const [form] = Form.useForm();
   const [imageType, setImageType] = useState('link');
+  const [type, setType] = useState(1);
+  const [isabout, seIsAbout] = useState(1);
+
+
   const [news, setNews] = useState<any | undefined>();
 
   const isEdit = newsId ? true : false;
@@ -84,6 +88,7 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
       const visit = +formdata.visit;
       const support = +formdata.support;
 
+      formdata.object_id = Number(formdata.object_id)
       API_SPORT.post(isEdit ? 'news.update' : 'news.add', '', {
         ...news,
         ...formdata,
@@ -123,6 +128,9 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
         top_at: moment(data.top_at * 1000),
         visit: data.visit,
         support: data.support,
+        object_id: data.object_id == 0 ? undefined : data.object_id,
+        is_associated: data.is_associated,
+        object_type: data.object_type == 0 ? 1 : data.object_type,
         published_at: moment(data.published_at * 1000),
         updated_at: moment(data.updated_at),
       });
@@ -270,6 +278,53 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
         <Form.Item label="球队ID" name="user_id" rules={[{ required: true, message: '不能为空' }]}>
           <AuthorSelect width={'100%'} />
         </Form.Item> */}
+
+        <Form.Item
+          label="关联类型"
+          name="object_type"
+          initialValue={1}
+          rules={[{ required: isabout == 1 ? true : false, message: '不能为空' }]}
+        >
+          <Radio.Group
+            onChange={(e) => {
+              setType(e.target.value);
+            }}
+          >
+            <Radio value={1}>关联球队</Radio>
+            <Radio value={3}>关联比赛</Radio>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item
+          label="是否关联"
+          name="is_associated"
+          initialValue={1}
+          rules={[{ required: true, message: '不能为空' }]}
+        >
+          <Radio.Group onChange={(e) => {
+            seIsAbout(e.target.value);
+          }}>
+            <Radio value={1}>是</Radio>
+            <Radio value={0}>否</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        {type == 1 &&
+          <Form.Item
+            label="球队ID"
+            name="object_id"
+            rules={[{ required: isabout == 1 ? true : false, message: '不能为空' }]}
+          >
+            <Input maxLength={128} />
+
+          </Form.Item>
+        }
+        {type == 3 && <Form.Item
+          label="比赛ID"
+          name="object_id"
+          rules={[{ required: isabout == 1 ? true : false, message: '不能为空' }]}
+        >
+          <Input maxLength={128} />
+        </Form.Item>}
         <Form.Item label="图片1录入方式" name="radio" initialValue="link">
           <Radio.Group
             onChange={(e) => {
@@ -379,7 +434,7 @@ const CreateNews: React.FC<Props> = ({ visible, onCancel, onSuccess, newsId }) =
           <FBDatePicker showTime style={{ width: '100%' }} />
         </Form.Item>
       </Form>
-    </Drawer>
+    </Drawer >
   );
 };
 
